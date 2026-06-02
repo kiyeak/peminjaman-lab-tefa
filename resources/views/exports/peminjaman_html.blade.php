@@ -7,24 +7,23 @@
         body { font-family: 'Arial', sans-serif; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #4F46E5; color: white; }
+        th { background-color: #b6252a; color: white; }
         .header { text-align: center; margin-bottom: 20px; }
         .date { text-align: right; font-size: 12px; margin-bottom: 10px; }
         @media print {
             .no-print { display: none; }
-            button { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="no-print" style="text-align: center; margin-bottom: 20px;">
-        <button onclick="window.print()" style="background: #4F46E5; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        <button onclick="window.print()" style="background: #b6252a; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
             🖨️ Print / Save as PDF
         </button>
     </div>
 
     <div class="header">
-        <h2>Laporan Peminjaman Peralatan</h2>
+        <h2 style="color: #b6252a;">Laporan Peminjaman Peralatan</h2>
         <h3>Lab TEFA PPLG</h3>
     </div>
     <div class="date">
@@ -57,9 +56,5 @@
             @endforeach
         </tbody>
     </table>
-
-    <div class="date" style="margin-top: 20px;">
-        Dicetak pada: {{ date('d/m/Y H:i:s') }}
-    </div>
 </body>
 </html>

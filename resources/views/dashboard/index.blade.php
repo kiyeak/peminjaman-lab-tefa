@@ -2,80 +2,80 @@
 
 @section('content')
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-primary">
         <div class="flex items-center">
-            <div class="p-3 bg-blue-100 rounded-full">
-                <i class="fas fa-users text-blue-600 text-2xl"></i>
+            <div class="p-3 bg-primaryLight rounded-full bg-opacity-20">
+                <i class="fas fa-users text-primary text-2xl"></i>
             </div>
             <div class="ml-4">
-                <p class="text-gray-500">Total Peminjam</p>
-                <p class="text-2xl font-bold">{{ $totalPeminjam }}</p>
+                <p class="text-mediumGray">Total Peminjam</p>
+                <p class="text-2xl font-bold text-darkGray">{{ $totalPeminjam }}</p>
             </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-primaryLight">
         <div class="flex items-center">
-            <div class="p-3 bg-green-100 rounded-full">
-                <i class="fas fa-tools text-green-600 text-2xl"></i>
+            <div class="p-3 bg-primaryLight rounded-full bg-opacity-20">
+                <i class="fas fa-tools text-primaryLight text-2xl"></i>
             </div>
             <div class="ml-4">
-                <p class="text-gray-500">Total Peralatan</p>
-                <p class="text-2xl font-bold">{{ $totalPeralatan }}</p>
+                <p class="text-mediumGray">Total Peralatan</p>
+                <p class="text-2xl font-bold text-darkGray">{{ $totalPeralatan }}</p>
             </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-darkGray">
         <div class="flex items-center">
-            <div class="p-3 bg-yellow-100 rounded-full">
-                <i class="fas fa-hand-holding text-yellow-600 text-2xl"></i>
+            <div class="p-3 bg-darkGray rounded-full bg-opacity-20">
+                <i class="fas fa-hand-holding text-darkGray text-2xl"></i>
             </div>
             <div class="ml-4">
-                <p class="text-gray-500">Total Peminjaman</p>
-                <p class="text-2xl font-bold">{{ $totalPeminjaman }}</p>
+                <p class="text-mediumGray">Total Peminjaman</p>
+                <p class="text-2xl font-bold text-darkGray">{{ $totalPeminjaman }}</p>
             </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-mediumGray">
         <div class="flex items-center">
-            <div class="p-3 bg-red-100 rounded-full">
-                <i class="fas fa-clock text-red-600 text-2xl"></i>
+            <div class="p-3 bg-mediumGray rounded-full bg-opacity-20">
+                <i class="fas fa-clock text-mediumGray text-2xl"></i>
             </div>
             <div class="ml-4">
-                <p class="text-gray-500">Sedang Dipinjam</p>
-                <p class="text-2xl font-bold">{{ $sedangDipinjam }}</p>
+                <p class="text-mediumGray">Sedang Dipinjam</p>
+                <p class="text-2xl font-bold text-darkGray">{{ $sedangDipinjam }}</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="bg-white rounded-lg shadow">
-    <div class="p-6 border-b">
-        <h3 class="text-lg font-semibold">Peminjaman Terbaru</h3>
+    <div class="p-6 border-b border-mediumGray">
+        <h3 class="text-lg font-semibold text-primary">Peminjaman Terbaru</h3>
     </div>
     <div class="p-6">
         <table class="w-full">
             <thead>
-                <tr class="text-left border-b">
-                    <th class="pb-2">Peminjam</th>
-                    <th class="pb-2">Peralatan</th>
-                    <th class="pb-2">Tanggal Pinjam</th>
-                    <th class="pb-2">Status</th>
-                </tr>
+                <tr class="text-left border-b border-mediumGray">
+                    <th class="pb-2 text-darkGray">Peminjam</th>
+                    <th class="pb-2 text-darkGray">Peralatan</th>
+                    <th class="pb-2 text-darkGray">Tanggal Pinjam</th>
+                    <th class="pb-2 text-darkGray">Status</th>
+                <tr>
             </thead>
             <tbody>
                 @foreach($recentPeminjaman as $item)
-                <tr class="border-b">
-                    <td class="py-2">{{ $item->peminjam->nama }}</td>
-                    <td class="py-2">{{ $item->peralatan->nama }}</td>
-                    <td class="py-2">{{ $item->tanggal_pinjam }}</td>
+                <tr class="border-b border-gray-200">
+                    <td class="py-2 text-darkGray">{{ $item->peminjam->nama }}</td>
+                    <td class="py-2 text-darkGray">{{ $item->peralatan->nama }}</td>
+                    <td class="py-2 text-darkGray">{{ $item->tanggal_pinjam }}</td>
                     <td class="py-2">
                         @if($item->status == 'dipinjam')
-                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Dipinjam</span>
+                            <span class="bg-primaryLight text-white px-2 py-1 rounded text-sm">Dipinjam</span>
                         @else
-                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Dikembalikan</span>
+                            <span class="bg-mediumGray text-white px-2 py-1 rounded text-sm">Dikembalikan</span>
                         @endif
                     </td>
                 </tr>

@@ -7,52 +7,79 @@
     <title>Lab TEFA PPLG - Peminjaman Peralatan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#b6252a',
+                        primaryLight: '#ed1e28',
+                        darkGray: '#55565b',
+                        mediumGray: '#959597',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-gray-100">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="{{ route('dashboard') }}" class="text-xl font-bold text-blue-600">Lab TEFA PPLG</a>
+    <!-- Sidebar & Content (tanpa navbar atas) -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar dengan warna #b6252a -->
+        <div class="w-64 bg-primary shadow-lg flex flex-col justify-between min-h-screen">
+            <!-- Logo/Tulisan di atas -->
+            <div class="pt-6 pb-4">
+                <div class="text-center border-b border-white border-opacity-30 pb-4 mx-4">
+                    <i class="fas fa-flask text-4xl text-white mb-2"></i>
+                    <h1 class="text-white text-xl font-bold">Lab TEFA PPLG</h1>
+                    <p class="text-white text-xs opacity-80">Peminjaman Peralatan</p>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <span class="text-gray-700">
-                        <i class="fas fa-user"></i> {{ auth()->user()->nama }}
-                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">{{ auth()->user()->role }}</span>
-                    </span>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                
+                <!-- Menu Navigasi -->
+                <nav class="mt-6">
+                    <a href="{{ route('dashboard') }}" class="flex items-center py-3 px-6 text-white hover:bg-primaryLight transition {{ request()->routeIs('dashboard') ? 'bg-primaryLight' : '' }}">
+                        <i class="fas fa-tachometer-alt w-5"></i>
+                        <span class="ml-3">Dashboard</span>
+                    </a>
+                    @if(auth()->user()->isAdmin())
+                    <a href="{{ route('peminjam.index') }}" class="flex items-center py-3 px-6 text-white hover:bg-primaryLight transition {{ request()->routeIs('peminjam.*') ? 'bg-primaryLight' : '' }}">
+                        <i class="fas fa-users w-5"></i>
+                        <span class="ml-3">Data Peminjam</span>
+                    </a>
+                    <a href="{{ route('peralatan.index') }}" class="flex items-center py-3 px-6 text-white hover:bg-primaryLight transition {{ request()->routeIs('peralatan.*') ? 'bg-primaryLight' : '' }}">
+                        <i class="fas fa-tools w-5"></i>
+                        <span class="ml-3">Data Peralatan</span>
+                    </a>
+                    @endif
+                    <a href="{{ route('peminjaman.index') }}" class="flex items-center py-3 px-6 text-white hover:bg-primaryLight transition {{ request()->routeIs('peminjaman.*') ? 'bg-primaryLight' : '' }}">
+                        <i class="fas fa-hand-holding w-5"></i>
+                        <span class="ml-3">Data Peminjaman</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User & Logout di bagian bawah -->
+            <div class="pb-6">
+                <div class="border-t border-white border-opacity-30 pt-4 mx-4">
+                    <div class="flex items-center px-4 py-2">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-primary"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-white text-sm font-semibold">{{ auth()->user()->nama }}</p>
+                            <p class="text-white text-xs opacity-75">{{ auth()->user()->role }}</p>
+                        </div>
+                    </div>
+                    <form action="{{ route('logout') }}" method="POST" class="mt-3">
                         @csrf
-                        <button type="submit" class="text-red-600 hover:text-red-800">
-                            <i class="fas fa-sign-out-alt"></i> Logout
+                        <button type="submit" class="flex items-center w-full py-3 px-6 text-white hover:bg-primaryLight transition rounded-lg">
+                            <i class="fas fa-sign-out-alt w-5"></i>
+                            <span class="ml-3">Logout</span>
                         </button>
                     </form>
                 </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Sidebar & Content -->
-    <div class="flex">
-        <!-- Sidebar -->
-        <div class="w-64 bg-white shadow-lg min-h-screen">
-            <nav class="mt-5">
-                <a href="{{ route('dashboard') }}" class="block py-2 px-4 text-gray-700 hover:bg-blue-50">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                </a>
-                @if(auth()->user()->isAdmin())
-                <a href="{{ route('peminjam.index') }}" class="block py-2 px-4 text-gray-700 hover:bg-blue-50">
-                    <i class="fas fa-users"></i> Data Peminjam
-                </a>
-                <a href="{{ route('peralatan.index') }}" class="block py-2 px-4 text-gray-700 hover:bg-blue-50">
-                    <i class="fas fa-tools"></i> Data Peralatan
-                </a>
-                @endif
-                <a href="{{ route('peminjaman.index') }}" class="block py-2 px-4 text-gray-700 hover:bg-blue-50">
-                    <i class="fas fa-hand-holding"></i> Data Peminjaman
-                </a>
-            </nav>
         </div>
 
         <!-- Main Content -->
